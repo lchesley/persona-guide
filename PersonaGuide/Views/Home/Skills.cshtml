@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PersonaGuide.Entities.Skill>
+
+@{
+    ViewBag.Title = "Skills Listing";
+}
+
+<h2>Skills Listing</h2>
+
+<div class="row row-buffer">
+    <div class="col-md-12">
+        @Html.ActionLink("Show All Skills", "Skills", null, new { @class = "btn btn-info pull-right" })
+    </div>
+</div>
+
+<div class="row">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.Name) </th>
+                <th>@Html.DisplayNameFor(m => m.Type) </th>
+                <th>@Html.DisplayNameFor(m => m.Description) </th>
+                <th>@Html.DisplayNameFor(m => m.Cost) </th>
+                <th>@Html.DisplayNameFor(m => m.CanPassDown)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.Name, "ShowBySkill", "Home", new { skill = item.Name }, null)</td>
+                    <td>@Html.ActionLink(item.Type, "SkillsByType", new { Type = item.Type })</td>
+                    <td>@Html.DisplayFor(i => item.Description)</td>
+                    <td>@Html.DisplayFor(i => item.Cost)</td>
+                    <td>@Html.DisplayFor(i => item.CanPassDown)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

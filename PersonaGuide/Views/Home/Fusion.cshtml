@@ -1,0 +1,62 @@
+﻿
+@model PersonaGuide.Entities.FusionResults
+
+@{
+    ViewBag.Title = "Fusion Simulator";
+}
+
+<h2>Fusion Simulator</h2>
+
+@Html.ValidationSummary(true)
+
+@using (Html.BeginForm("FullFusion", "Home"))
+{
+    <div>
+        <div class="row">
+            <fieldset class="col-md-6">
+                <legend>First Persona</legend>
+                @Html.DropDownList("first", (SelectList)ViewData["Names"], new { onchange = "this.form.submit();", @class = "form-control" })
+                @{
+    if (Model.FirstPersona != null)
+    {
+        Html.RenderPartial("_PersonaDetails", Model.FirstPersona);
+    }
+                }
+            </fieldset>
+            <fieldset class="col-md-6">
+                <legend>Second Persona</legend>
+                @Html.DropDownList("second", (SelectList)ViewData["Names"], new { onchange = "this.form.submit();", @class = "form-control" })
+                @{
+    if (Model.SecondPersona != null)
+    {
+        Html.RenderPartial("_PersonaDetails", Model.SecondPersona);
+    }
+                }
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset class="col-md-6">
+                <legend>Third Persona</legend>
+                @Html.DropDownList("third", (SelectList)ViewData["Names"], new { onchange = "this.form.submit();", @class = "form-control" })
+                @{
+    if (Model.ThirdPersona != null)
+    {
+        Html.RenderPartial("_PersonaDetails", Model.ThirdPersona);
+    }
+                }
+            </fieldset>
+
+            <fieldset class="col-md-6">
+                <legend>Result</legend>
+                @{
+    if (Model.ResultPersona != null)
+    {
+        Html.RenderPartial("_PersonaDetails", Model.ResultPersona);
+    }
+                }
+            </fieldset>
+
+        </div>
+
+    </div>
+}

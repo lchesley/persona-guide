@@ -1,0 +1,15 @@
+﻿@model PersonaGuide.Entities.Persona
+
+@{
+    ViewBag.Title = "Persona Details";
+    Html.RenderPartial("_PersonaDetails", Model);
+}
+<p>
+    @Html.ActionLink(String.Format("How Do I Fuse {0}?", Model.Name), "FuseByName", new { result = Model.Name })
+</p>
+<p>
+    @Html.ActionLink(String.Format("Start a Fusion With {0}", Model.Name), "FusionWith", new { first = Model.Name })
+</p>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

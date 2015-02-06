@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PersonaGuide.Entities.Persona>
+
+<script>
+    $(function () {
+        @*$("#name").autocomplete({
+            minLength: 1,
+            source: "@Url.Action("GetPersonaNames")",
+            select: function (event, ui) {
+                alert(ui.item.value);
+            }
+        });*@
+
+        $("#skill").autocomplete({
+            minLength: 1,
+            source: "@Url.Action("GetPersonaSkills")",
+            select: function (event, ui) {
+                var url = "/Home/Index";
+                $.post(url, { skill: ui.item.value })
+                 .done(function (response) {
+                     $("#personaList").html(response);
+                 })
+            }
+        });
+
+        $("#arcana").autocomplete({
+            minLength: 1,
+            source: "@Url.Action("GetPersonaArcana")",
+            select: function (event, ui) {
+                var url = "/Home/IndexByArcana";
+                $.post(url, { arcana: ui.item.value })
+                .done(function (response) {
+                    $("#personaList").html(response);
+                })
+            }
+        });
+
+        $(".pull-down").each(function () {
+            $(this).css("margin-top", $(this).parent().height() - $(this).height())
+        });
+    });
+</script>
+
+@{
+    ViewBag.Title = "Persona Listing";
+}
+
+<h2>Persona Listing</h2>
+
+<div class="row row-buffer">
+    @*<div class="col-md-3">       
+        <label for="name">Search By Name:</label> 
+        <input type="text" class="form-control" id="name" />
+    </div>*@
+    <div class="col-md-3">
+        <label for="skill">Search By Skill:</label>
+        <input type="text" class="form-control" id="skill" />
+    </div>
+    <div class="col-md-3">
+        <label for="arcana">Search By Arcana:</label>
+        <input type="text" class="form-control" id="arcana" />
+    </div>
+    <div class="col-md-3">
+        @Html.ActionLink("Show All Persona", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div id="personaList">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.Name) </th>
+                <th>@Html.DisplayNameFor(m => m.Arcana) </th>
+                <th>@Html.DisplayNameFor(m => m.InitialLevel) </th>
+                <th>@Html.DisplayNameFor(m => m.SkillsList) </th>
+                <th>@Html.DisplayNameFor(m => m.IsDownloadedContent)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.Name, "Details", new { id = item.Name })</td>                    
+                    <td>@Html.DisplayFor(i => item.Arcana)</td>
+                    <td>@Html.DisplayFor(i => item.InitialLevel)</td>
+                    <td>@Html.DisplayFor(i => item.SkillsList)</td>
+                    <td>@Html.DisplayFor(i => item.IsDownloadedContent)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

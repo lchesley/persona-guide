@@ -1,0 +1,72 @@
+﻿@model PersonaGuide.Entities.FusionSearchResults
+
+@{
+    ViewBag.Title = "How do I fuse . . .";
+}
+
+<h2>How do I fuse . . .?</h2>
+
+@using (Html.BeginForm("FuseByParameters", "Home"))
+{
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Resultant Persona</legend>
+            @Html.DropDownList("result", (SelectList)ViewData["Names"], new { onchange = "this.form.submit();", @class = "form-control" })
+            @{
+                if (Model.ResultPersona != null)
+                {
+                    Html.RenderPartial("_PersonaDetails", Model.ResultPersona);
+                }
+            }
+        </fieldset>
+
+        <fieldset class="col-md-6">
+            <legend>Fusion Parameters</legend>
+            <div class="row">
+                @Html.Label("MC Level") @Html.TextBox("level", Model.CappedLevel, new { @class = "form-control" })
+                @Html.Label("Fusion must include") @Html.DropDownList("first", (SelectList)ViewData["Names"], new { onchange = "this.form.submit();", @class = "form-control" })
+                @{
+                    if (Model.FirstPersona != null)
+                    {
+                        Html.RenderPartial("_PersonaDetails", Model.FirstPersona);
+                    }
+                }
+                @Html.Label("Also include") @Html.DropDownList("second", (SelectList)ViewData["Names"], new { onchange = "this.form.submit();", @class = "form-control" })
+                @{
+                    if (Model.SecondPersona != null)
+                    {
+                        Html.RenderPartial("_PersonaDetails", Model.SecondPersona);
+                    }
+                }
+            </div>
+        </fieldset>
+    </div>
+    <div class="row col-md-12">
+        @{
+            if (Model.Matches != null && Model.Matches.Count > 0)
+            {
+                <fieldset>
+                    <legend>Potential Matches</legend>
+                    @foreach (var match in Model.Matches)
+                    {
+                        <span>
+                                            
+                        @for(var i = 1; i <= match.Count(); i++)
+                        {                          
+                            if(i == match.Count())
+                            {
+                                @Html.ActionLink(string.Format("{0}", match[i - 1]), "Details", new { id = match[i - 1] });
+                            }
+                            else
+                            {
+                                @Html.ActionLink(string.Format("{0} + ", match[i - 1]), "Details", new { id = match[i - 1] });                                                                                                       
+                            }
+                        }
+
+                        </span><br />
+                    }
+                </fieldset>
+            }
+        }
+    </div>
+}
