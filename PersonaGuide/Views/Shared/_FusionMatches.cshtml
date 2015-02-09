@@ -1,0 +1,28 @@
+﻿@model PersonaGuide.Entities.FusionSearchResults
+
+@{
+    if (Model.Matches != null && Model.Matches.Count > 0)
+    {
+        <fieldset>
+            <legend>Potential Matches</legend>
+            @foreach (var match in Model.Matches)
+            {
+                <span>
+
+                    @for (var i = 1; i <= match.Count(); i++)
+                    {
+                        if (i == match.Count())
+                        {
+                            @Html.ActionLink(string.Format("{0}", match[i - 1]), "Details", new { id = match[i - 1] });
+                        }
+                        else
+                        {
+                            @Html.ActionLink(string.Format("{0} + ", match[i - 1]), "Details", new { id = match[i - 1] });
+                        }
+                    }
+
+                </span><br />
+            }
+        </fieldset>
+    }
+}
