@@ -36,7 +36,7 @@ namespace PersonaGuide.Models
                 return result;
             }
 
-            int averageBaseLevel = Convert.ToInt32(Math.Round(((double)firstPersona.InitialLevel + (double)secondPersona.InitialLevel) / 2, MidpointRounding.AwayFromZero)) + 1;
+            double averageBaseLevel = ((double)firstPersona.InitialLevel + (double)secondPersona.InitialLevel) / 2 + 1;
 
             //Same arcana means different fusion rules.
             if (firstPersona.Arcana == secondPersona.Arcana)
@@ -73,7 +73,7 @@ namespace PersonaGuide.Models
                 }
                 
                 //Take higher or lower, depending on which one has the smallest difference.
-                if(Math.Abs(lower.InitialLevel - averageBaseLevel) > Math.Abs(higher.InitialLevel - averageBaseLevel))
+                if(Math.Abs(averageBaseLevel - lower.InitialLevel) > Math.Abs(higher.InitialLevel - averageBaseLevel) || Math.Abs(averageBaseLevel - lower.InitialLevel) == Math.Abs(higher.InitialLevel - averageBaseLevel))
                 {
                     result = higher;
                 }
@@ -103,7 +103,7 @@ namespace PersonaGuide.Models
                 return result;
             }
 
-            int averageBaseLevel = Convert.ToInt32(Math.Round(((double)firstPersona.InitialLevel + (double)secondPersona.InitialLevel + (double)thirdPersona.InitialLevel) / 3, MidpointRounding.AwayFromZero)) + 5;
+            double averageBaseLevel = ((double)firstPersona.InitialLevel + (double)secondPersona.InitialLevel + (double)thirdPersona.InitialLevel) / 3 + 5;
 
             //Same Arcana means different fusion rules.
             if (firstPersona.Arcana == secondPersona.Arcana && firstPersona.Arcana == thirdPersona.Arcana)
@@ -157,7 +157,7 @@ namespace PersonaGuide.Models
                 }
 
                 //Take higher or lower, depending on which one has the smallest difference.
-                if (Math.Abs(lower.InitialLevel - averageBaseLevel) > Math.Abs(higher.InitialLevel - averageBaseLevel))
+                if (Math.Abs(averageBaseLevel - lower.InitialLevel) > Math.Abs(higher.InitialLevel - averageBaseLevel) || Math.Abs(averageBaseLevel - lower.InitialLevel) == Math.Abs(higher.InitialLevel - averageBaseLevel))
                 {
                     result = higher;
                 }
@@ -325,7 +325,7 @@ namespace PersonaGuide.Models
                 nextLowestLevel = 0;
             }
 
-            lowLevelRange = ((targetLevel - nextLowestLevel) / 2) + nextLowestLevel;
+            lowLevelRange = (((double)targetLevel - (double)nextLowestLevel) / 2) + nextLowestLevel;
 
             try
             {
@@ -336,7 +336,7 @@ namespace PersonaGuide.Models
                 nextHighestLevel = targetLevel;
             }
 
-            highLevelRange = ((nextHighestLevel - targetLevel) / 2) + targetLevel;
+            highLevelRange = (((double)nextHighestLevel - (double)targetLevel) / 2) + targetLevel;
 
             //Get the next two highest for a valid same arcana fusion.
             List<Persona> doubleCombo = personaModel.GetPersonaList(personaToFuse.Arcana).Where(o => o.InitialLevel > targetLevel && o.InitialLevel <= cappedComponentLevel).OrderBy(o => o.InitialLevel).Take(2).ToList<Persona>();
@@ -364,9 +364,9 @@ namespace PersonaGuide.Models
                         {
                             if (!second.Equals(personaToFuse) && !first.Equals(second))
                             {
-                                int resultingFusionLevel = Convert.ToInt32(Math.Round(((double)first.InitialLevel + (double)second.InitialLevel) / 2, MidpointRounding.AwayFromZero)) + 1;                                
+                                double resultingFusionLevel = ((double)first.InitialLevel + (double)second.InitialLevel) / 2 + 1;                                
 
-                                if (resultingFusionLevel >= lowLevelRange && resultingFusionLevel < highLevelRange)
+                                if (resultingFusionLevel > lowLevelRange && resultingFusionLevel < highLevelRange)
                                 {
                                     if (!fusionUtilities.ListContainsFusionCombination(combinations, first.Name, second.Name))
                                     {
@@ -402,7 +402,7 @@ namespace PersonaGuide.Models
                 nextLowestLevel = 0;
             }
 
-            lowLevelRange = ((targetLevel - nextLowestLevel) / 2) + nextLowestLevel;
+            lowLevelRange = (((double)targetLevel - (double)nextLowestLevel) / 2) + nextLowestLevel;
 
             try
             {
@@ -413,7 +413,7 @@ namespace PersonaGuide.Models
                 nextHighestLevel = targetLevel;
             }
 
-            highLevelRange = ((nextHighestLevel - targetLevel) / 2) + targetLevel;
+            highLevelRange = (((double)nextHighestLevel - (double)targetLevel) / 2) + targetLevel;
 
             //Check for a valid triple combination - three lower of the same arcana.
             List<Persona> tripleCombo = personaModel.GetPersonaList(personaToFuse.Arcana).Where(o => o.InitialLevel < personaToFuse.InitialLevel && o.InitialLevel <= cappedComponentLevel).OrderBy(o => o.InitialLevel).Take(3).ToList<Persona>();
@@ -454,9 +454,9 @@ namespace PersonaGuide.Models
                                 {
                                     if (!second.Equals(third) && !second.Equals(first) && second.Arcana != first.Arcana)
                                     {
-                                        int resultingFusionLevel = Convert.ToInt32(Math.Round(((double)first.InitialLevel + (double)second.InitialLevel + (double)third.InitialLevel) / 3, MidpointRounding.AwayFromZero)) + 5;
+                                        double resultingFusionLevel = ((double)first.InitialLevel + (double)second.InitialLevel + (double)third.InitialLevel) / 3 + 5;
                                         
-                                        if (resultingFusionLevel >= lowLevelRange && resultingFusionLevel < highLevelRange && third.InitialLevel > first.InitialLevel && third.InitialLevel > second.InitialLevel)
+                                        if (resultingFusionLevel > lowLevelRange && resultingFusionLevel < highLevelRange && third.InitialLevel > first.InitialLevel && third.InitialLevel > second.InitialLevel)
                                         {
                                             if (!fusionUtilities.ListContainsFusionCombination(combinations, first.Name, second.Name, third.Name))
                                             {
@@ -490,7 +490,7 @@ namespace PersonaGuide.Models
                                 {
                                     if (!second.Equals(third) && !second.Equals(first) && second.Arcana != first.Arcana)
                                     {
-                                        int resultingFusionLevel = Convert.ToInt32(Math.Round(((double)first.InitialLevel + (double)second.InitialLevel + (double)third.InitialLevel) / 3, MidpointRounding.AwayFromZero)) + 5;
+                                        double resultingFusionLevel = ((double)first.InitialLevel + (double)second.InitialLevel + (double)third.InitialLevel) / 3 + 5;
 
                                         //if (resultingFusionLevel > nextLowestLevel && resultingFusionLevel < targetLevel && third.InitialLevel > first.InitialLevel && third.InitialLevel > second.InitialLevel)
                                         //{
