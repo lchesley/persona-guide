@@ -22,7 +22,10 @@ namespace PersonaGuide.Entities
         public bool IsDownloadedContent { get; set; }
         [DisplayName("Card")]
         public string CardExtracted { get; set; }
+        [DisplayName("Inheritance Type")]
+        public PersonaType Type { get; set; }
         public List<PersonaSkills> Skills { get; set; }
+        public List<SkillInheritance> InheritanceMatrix { get; set; }
         [DisplayName("Skills")]
         public string SkillsList
         {
@@ -48,6 +51,25 @@ namespace PersonaGuide.Entities
                 return temp.Remove(temp.Length - 2);
             }
         }
+        [DisplayName("Inheritable Skill Types")]
+        public string InheritableSkillTypes
+        {
+            get
+            {
+                string temp = String.Empty;
+
+                if(InheritanceMatrix != null && InheritanceMatrix.Count > 0)
+                {
+                    foreach(SkillInheritance item in InheritanceMatrix)
+                    {
+                        temp += String.Format("{0}, ", item.Type);
+                    }
+                }
+
+                return temp.Remove(temp.Length - 2);
+            }
+        }
+
 
         public override bool Equals(object obj)
         {

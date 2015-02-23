@@ -10,10 +10,13 @@ namespace PersonaGuide.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        [DisplayName("Sub-Type")]
         public string Type { get; set; }
         public string Cost { get; set; }
         [DisplayName("Inheritable")]
         public bool CanPassDown { get; set; }
+        [DisplayName("Type")]
+        public InheritanceType SkillType { get; set; }
 
         public override bool Equals(object obj)
         {

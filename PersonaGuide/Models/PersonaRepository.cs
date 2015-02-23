@@ -16,6 +16,7 @@ namespace PersonaGuide.Models
         PersonaModel personaModel;
         FusionModel fusionModel;
         FusionUtilities fusionUtilities;
+        InheritanceUtilities inheritanceUtilities;
 
         public PersonaRepository()
         {
@@ -23,8 +24,9 @@ namespace PersonaGuide.Models
             skillReader = new StreamReader(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/SkillList.csv"));
 
             fusionUtilities = new FusionUtilities();
+            inheritanceUtilities = new InheritanceUtilities();
             skillModel = new SkillModel(skillReader);
-            personaModel = new PersonaModel(personaReader, skillModel);
+            personaModel = new PersonaModel(personaReader, skillModel, inheritanceUtilities);
             fusionModel = new FusionModel(personaModel, fusionUtilities);
         }
 
@@ -42,6 +44,11 @@ namespace PersonaGuide.Models
         {
             Skill skill = skillModel.GetSkillBySkillName(skillName);
             return personaModel.GetPersonaList(skill);
+        }
+
+        public List<Persona> GetPersonaListByType(PersonaType type)
+        {
+            return personaModel.GetPersonaList(type);
         }
 
         public Persona GetPersonaByPersonaName(string name)

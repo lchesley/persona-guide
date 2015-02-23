@@ -34,6 +34,18 @@
             }
         });
 
+        $("#inheritanceType").autocomplete({
+            minLength: 1,
+            source: "@Url.Action("GetPersonaTypes")",
+            select: function (event, ui) {
+                var url = "/Home/IndexByType";
+                $.post(url, { inheritanceType: ui.item.value })
+                .done(function (response) {
+                    $("#personaList").html(response);
+                })
+            }
+    });
+
         $(".pull-down").each(function () {
             $(this).css("margin-top", $(this).parent().height() - $(this).height())
         });
@@ -60,6 +72,10 @@
         <input type="text" class="form-control" id="arcana" />
     </div>
     <div class="col-md-3">
+        <label for="arcana">Filter By Type:</label>
+        <input type="text" class="form-control" id="inheritanceType" />
+    </div>
+    <div class="col-md-3">
         @Html.ActionLink("Show All Persona", "Index", null, new { @class = "btn btn-primary" })
     </div>
 </div>
@@ -72,6 +88,7 @@
                 <th>@Html.DisplayNameFor(m => m.InitialLevel) </th>
                 <th>@Html.DisplayNameFor(m => m.SkillsList) </th>
                 <th>@Html.DisplayNameFor(m => m.IsDownloadedContent)</th>
+                <th>@Html.DisplayNameFor(m => m.Type)</th>
             </tr>
         </thead>
         <tbody>
@@ -83,6 +100,7 @@
                     <td>@Html.DisplayFor(i => item.InitialLevel)</td>
                     <td>@Html.DisplayFor(i => item.SkillsList)</td>
                     <td>@Html.DisplayFor(i => item.IsDownloadedContent)</td>
+                    <td>@Html.DisplayFor(i => item.Type)</td>
                 </tr>
             }
         </tbody>

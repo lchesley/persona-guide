@@ -118,14 +118,18 @@
     <Compile Include="Entities\Arcana.cs" />
     <Compile Include="Entities\FusionResults.cs" />
     <Compile Include="Entities\FusionSearchResults.cs" />
+    <Compile Include="Entities\InheritanceType.cs" />
     <Compile Include="Entities\Persona.cs" />
     <Compile Include="Entities\PersonaSkills.cs" />
+    <Compile Include="Entities\PersonaType.cs" />
     <Compile Include="Entities\Skill.cs" />
+    <Compile Include="Entities\SkillInheritance.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FusionModel.cs" />
     <Compile Include="Models\FusionUtilities.cs" />
+    <Compile Include="Models\InheritanceUtilities.cs" />
     <Compile Include="Models\PersonaModel.cs" />
     <Compile Include="Models\PersonaRepository.cs" />
     <Compile Include="Models\SkillModel.cs" />

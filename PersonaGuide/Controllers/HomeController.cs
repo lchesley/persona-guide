@@ -35,6 +35,14 @@ namespace PersonaGuide.Controllers
             return PartialView("_PersonaList", (IEnumerable<Persona>)list);
         }
 
+        // GET: Persona Listing By Inheritance Type.
+        [ActionName("IndexByType")]
+        public ActionResult IndexByType(string inheritanceType)
+        {
+            List<Persona> list = repository.GetPersonaListByType((PersonaType)Enum.Parse(typeof(PersonaType), inheritanceType));
+            return PartialView("_PersonaList", (IEnumerable<Persona>)list);
+        }
+
         // GET: Persona/Details/Ukobach
         public ActionResult Details(string id)
         {
@@ -154,6 +162,12 @@ namespace PersonaGuide.Controllers
         public JsonResult GetPersonaArcana(string term)
         {
             var result = Enum.GetNames(typeof(Arcana)).Where(o => o.StartsWith(term, true, System.Globalization.CultureInfo.InvariantCulture));
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetPersonaTypes(string term)
+        {
+            var result = Enum.GetNames(typeof(PersonaType)).Where(o => o.StartsWith(term, true, System.Globalization.CultureInfo.InvariantCulture));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

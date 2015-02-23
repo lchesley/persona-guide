@@ -24,7 +24,10 @@
     <strong>@Html.DisplayNameFor(model => model.CardExtracted) : </strong>
 
     @Html.DisplayFor(model => model.CardExtracted) <br />
+    
+    <strong>@Html.DisplayNameFor(model => model.InheritableSkillTypes) : </strong> 
 
+    @Html.DisplayFor(model => model.InheritableSkillTypes) <br />
     <hr />
     <table class="table table-striped table-bordered">
         <thead>
@@ -32,19 +35,21 @@
                 <td></td>
                 <td>Name</td>
                 <td>Type</td>
+                <td>Sub-Type</td>
                 <td>Cost</td>
-                <td>Description</td>
+                <td>Description</td>                
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.Skills)
             {
-                <tr>
+                <tr @(item.Skill.CanPassDown ? String.Empty : "class=danger")>
                     <td>@Html.DisplayFor(i => item.LevelLearned)</td>
                     <td>@Html.DisplayFor(i => item.Skill.Name)</td>
+                    <td>@Html.DisplayFor(i => item.Skill.SkillType)</td>
                     <td>@Html.DisplayFor(i => item.Skill.Type)</td>
                     <td>@Html.DisplayFor(i => item.Skill.Cost)</td>
-                    <td>@Html.DisplayFor(i => item.Skill.Description)</td>
+                    <td>@Html.DisplayFor(i => item.Skill.Description)</td>                    
                 </tr>
             }
         </tbody>

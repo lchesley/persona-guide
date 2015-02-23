@@ -12,10 +12,12 @@ namespace PersonaGuide.Models
     {
         List<Persona> personaList;
         SkillModel skillModel;
+        InheritanceUtilities inheritanceUtilities;
 
-        public PersonaModel(StreamReader reader, SkillModel skillModel)
+        public PersonaModel(StreamReader reader, SkillModel skillModel, InheritanceUtilities inheritanceUtilities)
         {
             this.skillModel = skillModel;
+            this.inheritanceUtilities = inheritanceUtilities;
             personaList = BuildPersonaList(reader);
         }
 
@@ -37,6 +39,8 @@ namespace PersonaGuide.Models
                     persona.IsDownloadedContent = (csv.GetField<string>("DLC") == "X") ? true : false;
                     persona.Name = csv.GetField<string>("Persona");
                     persona.Skills = skillModel.BuildSkillLevelsFromSkillList(csv.GetField<string>("Skills"));
+                    persona.Type = (csv.GetField<string>("Type") == "") ? PersonaType.Any : (PersonaType)Enum.Parse(typeof(PersonaType), csv.GetField<string>("Type"));
+                    persona.InheritanceMatrix = inheritanceUtilities.GetSkillInheritance(persona.Type);
                     list.Add(persona);
                 }
             }
@@ -72,6 +76,11 @@ namespace PersonaGuide.Models
             }
 
             return list;
+        }
+
+        public List<Persona> GetPersonaList(PersonaType type)
+        {
+            return personaList.Where(o => o.Type == type).OrderBy(o => o.InitialLevel).ToList<Persona>();
         }
 
         public Persona GetPersonaByName(string name)

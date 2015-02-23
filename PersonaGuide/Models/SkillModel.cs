@@ -32,6 +32,7 @@ namespace PersonaGuide.Models
                     skill.CanPassDown = (csv.GetField<string>("Heritable") == "X") ? true : false;
                     skill.Name = csv.GetField<string>("Skill");
                     skill.Type = csv.GetField<string>("Type");
+                    skill.SkillType = (InheritanceType)Enum.Parse(typeof(InheritanceType), csv.GetField<string>("InheritanceType"));
                     skills.Add(skill);
                 }
             }
@@ -76,6 +77,13 @@ namespace PersonaGuide.Models
         public List<Skill> GetSkills()
         {
             return skillList;
+        }
+
+        public List<string> GetSkillTypes()
+        {
+            List<string> types = skillList.Select(o => o.Type).Distinct().ToList<string>();
+
+            return types;
         }
     }
 }

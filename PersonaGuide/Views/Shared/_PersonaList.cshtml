@@ -7,7 +7,8 @@
             <th>@Html.DisplayNameFor(m => m.Arcana) </th>
             <th>@Html.DisplayNameFor(m => m.InitialLevel) </th>
             <th>@Html.DisplayNameFor(m => m.SkillsList) </th>
-            <th>@Html.DisplayNameFor(m => m.IsDownloadedContent)</th>
+            <th>@Html.DisplayNameFor(m => m.IsDownloadedContent)</th>        
+            <th>@Html.DisplayNameFor(m => m.Type)</th>    
         </tr>
     </thead>
     <tbody>
@@ -18,7 +19,8 @@
                 <td>@Html.DisplayFor(i => item.Arcana)</td>
                 <td>@Html.DisplayFor(i => item.InitialLevel)</td>
                 <td>@Html.DisplayFor(i => item.SkillsList)</td>
-                <td>@Html.DisplayFor(i => item.IsDownloadedContent)</td>
+                <td>@Html.DisplayFor(i => item.IsDownloadedContent)</td>      
+                <td>@Html.DisplayFor(i => item.Type)</td>          
             </tr>
         }
     </tbody>
