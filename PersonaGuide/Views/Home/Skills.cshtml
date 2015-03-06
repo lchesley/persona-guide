@@ -20,20 +20,18 @@
                 <th>@Html.DisplayNameFor(m => m.SkillType)</th>
                 <th>@Html.DisplayNameFor(m => m.Type) </th>                
                 <th>@Html.DisplayNameFor(m => m.Description) </th>
-                <th>@Html.DisplayNameFor(m => m.Cost) </th>
-                <th>@Html.DisplayNameFor(m => m.CanPassDown)</th>
+                <th>@Html.DisplayNameFor(m => m.Cost) </th>                
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@Html.ActionLink(item.Name, "ShowBySkill", "Home", new { skill = item.Name }, null)</td>                    
+                <tr @(item.CanPassDown ? String.Empty : "class=danger")>
+                    <td>@Html.ActionLink(item.Name, "ShowBySkill", "Home", new { skill = item.Name }, null)</td>
                     <td>@Html.DisplayFor(i => item.SkillType)</td>
                     <td>@Html.ActionLink(item.Type, "SkillsByType", new { Type = item.Type })</td>
                     <td>@Html.DisplayFor(i => item.Description)</td>
-                    <td>@Html.DisplayFor(i => item.Cost)</td>
-                    <td>@Html.DisplayFor(i => item.CanPassDown)</td>
+                    <td>@Html.DisplayFor(i => item.Cost)</td>                    
                 </tr>
             }
         </tbody>
