@@ -135,7 +135,7 @@ Evil Smile,Moderate chance to inflict Curse to all foes,Ailment,12 SP,X,Status
 Disarm,Moderate chance to inflict Strength Bind to one foe,Bind,8 SP,X,Status
 Makajam,Moderate chance to inflict Magic Bind to one foe,Bind,8 SP,X,Status
 Scarecrow,Moderate chance to inflict Agility Bind to one foe,Bind,8 SP,X,Status
-Salome's Kiss,"Moderate chance to inflict Strength, Magic, or Agility Bind to one foe",Bind,64SP,X,Status
+Salome's Kiss,"Moderate chance to inflict Strength, Magic, or Agility Bind to one foe",Bind,64SP,,Status
 Panic Circle,Deploys a Circle that has a moderate chance to inflict Panic to all foes,Circle,18 SP,X,Status
 Poison Circle,Deploys a Circle that has a moderate chance to inflict Poison to all foes,Circle,18 SP,X,Status
 Sleep Circle,Deploys a Circle that has a moderate chance to inflict Sleep to all foes,Circle,18 SP,X,Status
@@ -214,7 +214,7 @@ Bloody Vanguard,Foes damaged by this character takes increased damage from allie
 Colossal Swing,Low chance for a single target offensive skill's damage to spread to adjacent foes.,Passive,0,,Passive
 Forked Spear,"Moderate chance for the ""Attack"" command to occur a second time.",Passive,0,X,Passive
 Heroic Gemini,Low chance to automatically cast an offensive skill a second time.,Passive,0,,Passive
-Death's Scythe,Greatly increases damage done against targets afflicted with negative status,Passive,0,X,Passive
+Death's Scythe,Greatly increases damage done against targets afflicted with negative status,Passive,0,,Passive
 Judgment Sword,Automatically attacks with 'Attack' command when foe is afflicted with Seal status.,Passive,0,,Passive
 Punishment,Increases critical chance against targets with Seal status,Passive,0,X,Passive
 Impure Reach,Increases chance to afflict foe with negative status,Passive,0,X,Passive
@@ -222,7 +222,7 @@ Binding Hands,Increases chance to afflict foe with Seal,Passive,0,X,Passive
 Double Link,"Increases the damage for the first hit of Link, allows for a total of 3 follow up hits",Passive,0,X,Passive
 Triple Link,"Increases the damage for the first hit of Link, allows for a total of 4 follow up hits",Passive,0,X,Passive
 Quadruple Link,"Increases the damage for the first hit of Link, allows for a total of 5 follow up hits",Passive,0,X,Passive
-Infinite Link,"Increases the damage for the first hit of Link, allows for a total of 8 follow up hits",Passive,0,X,Passive
+Infinite Link,"Increases the damage for the first hit of Link, allows for a total of 8 follow up hits",Passive,0,,Passive
 Golden Link,Increases damage of Link's proc damage according to how how many times it has been activated. Only deals increased damage from 2 proc onwards,Passive,0,,Passive
 Shura Instincts,High chance to activate Shura Tensei every turn. Consumes HP each turn to greatly increase attack power.,Passive,0,,Passive
 Lemegeton,Raise power of summons in Circles.,Passive,0,,Passive

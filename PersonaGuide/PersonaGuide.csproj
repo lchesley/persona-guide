@@ -180,6 +180,7 @@
     <Content Include="App_Data\FusionGuide.csv" />
     <Content Include="App_Data\SkillList.csv" />
     <None Include="Properties\PublishProfiles\PersonaGuide %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\PersonaGuide %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\PersonaGuide.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
