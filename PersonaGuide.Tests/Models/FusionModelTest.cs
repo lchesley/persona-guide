@@ -13,7 +13,8 @@ namespace PersonaManager.Tests.Models
     {
         SkillModel skillModel;
         PersonaModel personaModel;
-        FusionModel fusionModel;        
+        FusionModel fusionModel;
+        InheritanceUtilities inheritanceUtilities;
 
         [TestInitialize]
         [DeploymentItem(@"App_Data\", @"App_Data\")]
@@ -23,9 +24,10 @@ namespace PersonaManager.Tests.Models
             StreamReader skillList = new StreamReader("App_Data\\SkillList.csv");
 
             FusionUtilities fusionUtilities = new FusionUtilities();
+            inheritanceUtilities = new InheritanceUtilities();
 
             skillModel = new SkillModel(skillList);
-            personaModel = new PersonaModel(fusionGuide, skillModel);            
+            personaModel = new PersonaModel(fusionGuide, skillModel, inheritanceUtilities);            
             fusionModel = new FusionModel(personaModel, fusionUtilities);
         }
 

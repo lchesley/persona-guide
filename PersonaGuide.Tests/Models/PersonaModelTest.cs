@@ -12,16 +12,18 @@ namespace PersonaManager.Tests.Models
     {
         SkillModel skillModel;
         PersonaModel model;
+        InheritanceUtilities inheritanceUtilities;
 
         [TestInitialize]
         [DeploymentItem(@"App_Data\", @"App_Data\")]
         public void Initialize()
         {
             StreamReader fusionGuide = new StreamReader("App_Data\\FusionGuide.csv");
-            StreamReader skillList = new StreamReader("App_Data\\SkillList.csv");            
+            StreamReader skillList = new StreamReader("App_Data\\SkillList.csv");
 
+            inheritanceUtilities = new InheritanceUtilities();
             skillModel = new SkillModel(skillList);
-            model = new PersonaModel(fusionGuide, skillModel);            
+            model = new PersonaModel(fusionGuide, skillModel, inheritanceUtilities);            
         }
 
         [TestMethod]        
