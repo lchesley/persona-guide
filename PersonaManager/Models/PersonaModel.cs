@@ -12,10 +12,12 @@ namespace PersonaManager.Models
     public class PersonaModel
     {
         List<Persona> personaList;
+        SkillModel skillModel;
 
-        public PersonaModel(StreamReader reader)
-        {            
-            personaList = BuildPersonaList(reader);
+        public PersonaModel(StreamReader reader, SkillModel model)
+        {
+            skillModel = model;
+            personaList = BuildPersonaList(reader);            
         }
 
         public List<Persona> GetPersonaList()
@@ -36,11 +38,11 @@ namespace PersonaManager.Models
                     persona.HPIncrease = Convert.ToInt32(csv.GetField<string>("HP"));
                     persona.SPIncrease = Convert.ToInt32(csv.GetField<string>("SP"));
                     persona.Arcana = (Arcana)Enum.Parse(typeof(Arcana), csv.GetField<string>("Arcana"));
-                    //persona.ExtractedSkill = csv.GetField<string>("Card");
+                    persona.ExtractedSkill = skillModel.GetSkillBySkillName(csv.GetField<string>("Card"));
                     persona.InitialLevel = Convert.ToInt32(csv.GetField<string>("Lv"));
                     persona.IsDownloadedContent = (csv.GetField<string>("DLC") == "X") ? true : false;
                     persona.Name = csv.GetField<string>("Persona");
-                    //persona.LearnedSkills = skillModel.BuildSkillLevelsFromSkillList(csv.GetField<string>("Skills"));
+                    persona.LearnedSkills = skillModel.GetLearnedSkillsFromSkillList(csv.GetField<string>("Skills"));
                     persona.InheritanceType = (csv.GetField<string>("Type") == "") ? PersonaInheritanceType.Any : (PersonaInheritanceType)Enum.Parse(typeof(PersonaInheritanceType), csv.GetField<string>("Type"));
                     //persona.InheritableSkillTypes = inheritanceUtilities.GetSkillInheritance(persona.InheritanceType);
                     list.Add(persona);

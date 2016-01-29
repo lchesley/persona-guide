@@ -9,13 +9,17 @@ namespace PersonaManager.Tests.Models
     public class PersonaModelTests
     {
         PersonaModel model;
+        SkillModel skillModel;
 
         [TestInitialize]
         [DeploymentItem(@"App_Data\", @"App_Data\")]
         public void Initialize()
         {
             StreamReader fusionGuide = new StreamReader("App_Data\\FusionGuide.csv");
-            model = new PersonaModel(fusionGuide);            
+            StreamReader skillList = new StreamReader("App_Data\\SkillList.csv");
+
+            skillModel = new SkillModel(skillList);
+            model = new PersonaModel(fusionGuide, skillModel);            
         }
 
         [TestMethod]
