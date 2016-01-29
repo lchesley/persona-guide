@@ -33,16 +33,16 @@ namespace PersonaManager.Models
                 while (csv.Read())
                 {
                     Persona persona = new Persona();
-                    //persona.AddedHP = Convert.ToInt32(csv.GetField<string>("HP"));
-                    //persona.AddedSP = Convert.ToInt32(csv.GetField<string>("SP"));
-                    //persona.Arcana = (Arcana)Enum.Parse(typeof(Arcana), csv.GetField<string>("Arcana"));
-                    //persona.CardExtracted = csv.GetField<string>("Card");
-                    //persona.InitialLevel = Convert.ToInt32(csv.GetField<string>("Lv"));
-                    //persona.IsDownloadedContent = (csv.GetField<string>("DLC") == "X") ? true : false;
-                    //persona.Name = csv.GetField<string>("Persona");
-                    //persona.Skills = skillModel.BuildSkillLevelsFromSkillList(csv.GetField<string>("Skills"));
-                    //persona.Type = (csv.GetField<string>("Type") == "") ? PersonaType.Any : (PersonaType)Enum.Parse(typeof(PersonaType), csv.GetField<string>("Type"));
-                    //persona.InheritanceMatrix = inheritanceUtilities.GetSkillInheritance(persona.Type);
+                    persona.HPIncrease = Convert.ToInt32(csv.GetField<string>("HP"));
+                    persona.SPIncrease = Convert.ToInt32(csv.GetField<string>("SP"));
+                    persona.Arcana = (Arcana)Enum.Parse(typeof(Arcana), csv.GetField<string>("Arcana"));
+                    //persona.ExtractedSkill = csv.GetField<string>("Card");
+                    persona.InitialLevel = Convert.ToInt32(csv.GetField<string>("Lv"));
+                    persona.IsDownloadedContent = (csv.GetField<string>("DLC") == "X") ? true : false;
+                    persona.Name = csv.GetField<string>("Persona");
+                    //persona.LearnedSkills = skillModel.BuildSkillLevelsFromSkillList(csv.GetField<string>("Skills"));
+                    persona.InheritanceType = (csv.GetField<string>("Type") == "") ? PersonaInheritanceType.Any : (PersonaInheritanceType)Enum.Parse(typeof(PersonaInheritanceType), csv.GetField<string>("Type"));
+                    //persona.InheritableSkillTypes = inheritanceUtilities.GetSkillInheritance(persona.InheritanceType);
                     list.Add(persona);
                 }
             }

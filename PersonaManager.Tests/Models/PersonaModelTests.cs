@@ -40,7 +40,7 @@ namespace PersonaManager.Tests.Models
             var result = model.GetPersonaList();
 
             //Assert
-            Assert.AreNotEqual(result.Count, actualCount);            
+            Assert.AreNotEqual(result.Count, actualCount);              
         }
     }
 }
