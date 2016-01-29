@@ -165,7 +165,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Entities\Arcana.cs" />
+    <Compile Include="Entities\InheritanceType.cs" />
+    <Compile Include="Entities\LearnedSkill.cs" />
     <Compile Include="Entities\Persona.cs" />
+    <Compile Include="Entities\Skill.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

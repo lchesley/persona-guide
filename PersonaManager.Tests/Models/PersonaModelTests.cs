@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PersonaManager.Models;
+using System.IO;
 
 namespace PersonaManager.Tests.Models
 {
@@ -9,10 +10,12 @@ namespace PersonaManager.Tests.Models
     {
         PersonaModel model;
 
-        [TestInitialize]        
+        [TestInitialize]
+        [DeploymentItem(@"App_Data\", @"App_Data\")]
         public void Initialize()
-        {            
-            model = new PersonaModel();
+        {
+            StreamReader fusionGuide = new StreamReader("App_Data\\FusionGuide.csv");
+            model = new PersonaModel(fusionGuide);            
         }
 
         [TestMethod]

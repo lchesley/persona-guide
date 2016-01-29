@@ -11,16 +11,23 @@ namespace PersonaManager.Models
 {
     public class PersonaModel
     {
-        public List<Persona> GetPersonaList()
-        {
-            return BuildPersonaList();
+        List<Persona> personaList;
+
+        public PersonaModel(StreamReader reader)
+        {            
+            personaList = BuildPersonaList(reader);
         }
 
-        protected List<Persona> BuildPersonaList()
+        public List<Persona> GetPersonaList()
+        {
+            return personaList;
+        }
+
+        protected List<Persona> BuildPersonaList(StreamReader reader)
         {
             List<Persona> list = new List<Persona>();
-
-            using (TextReader textReader = new StreamReader(HostingEnvironment.MapPath("~/App_Data/FusionGuide.csv")))
+            
+            using (TextReader textReader = reader)
             {
                 var csv = new CsvReader(textReader);
                 while (csv.Read())
