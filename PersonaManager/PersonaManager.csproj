@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -166,7 +167,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Entities\Arcana.cs" />
-    <Compile Include="Entities\InheritanceType.cs" />
+    <Compile Include="Entities\PersonaInheritanceType.cs" />
+    <Compile Include="Entities\SkillInheritance.cs" />
+    <Compile Include="Entities\SkillInheritanceType.cs" />
     <Compile Include="Entities\LearnedSkill.cs" />
     <Compile Include="Entities\Persona.cs" />
     <Compile Include="Entities\Skill.cs" />
