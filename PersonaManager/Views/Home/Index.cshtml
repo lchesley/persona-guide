@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<PersonaManager.Entities.Persona>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -18,14 +20,31 @@
         </p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div id="personaList">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.Name) </th>
+                    <th>@Html.DisplayNameFor(m => m.Arcana) </th>
+                    <th>@Html.DisplayNameFor(m => m.InitialLevel) </th>
+                    <th>@Html.DisplayNameFor(m => m.SkillsList) </th>
+                    <th>@Html.DisplayNameFor(m => m.IsDownloadedContent)</th>
+                    <th>@Html.DisplayNameFor(m => m.InheritanceType)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(item.Name, "Details", new { id = item.Name })</td>
+                        <td>@Html.DisplayFor(i => item.Arcana)</td>
+                        <td>@Html.DisplayFor(i => item.InitialLevel)</td>
+                        <td>@Html.DisplayFor(i => item.SkillsList)</td>
+                        <td>@Html.DisplayFor(i => item.IsDownloadedContent)</td>
+                        <td>@Html.DisplayFor(i => item.InheritanceType)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

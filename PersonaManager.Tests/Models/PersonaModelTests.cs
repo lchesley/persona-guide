@@ -10,6 +10,7 @@ namespace PersonaManager.Tests.Models
     {
         PersonaModel model;
         SkillModel skillModel;
+        InheritanceModel inheritanceModel;
 
         [TestInitialize]
         [DeploymentItem(@"App_Data\", @"App_Data\")]
@@ -19,7 +20,8 @@ namespace PersonaManager.Tests.Models
             StreamReader skillList = new StreamReader("App_Data\\SkillList.csv");
 
             skillModel = new SkillModel(skillList);
-            model = new PersonaModel(fusionGuide, skillModel);            
+            inheritanceModel = new InheritanceModel();
+            model = new PersonaModel(fusionGuide, skillModel, inheritanceModel);            
         }
 
         [TestMethod]

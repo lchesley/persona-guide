@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PersonaManager.Entities;
+using PersonaManager.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,12 @@ namespace PersonaManager.Controllers
 {
     public class HomeController : Controller
     {
+        private PersonaRepository repository = new PersonaRepository();
+
         public ActionResult Index()
         {
-            return View();
+            List<Persona> list = repository.GetPersonaList();
+            return View((IEnumerable<Persona>)list);
         }
 
         public ActionResult About()

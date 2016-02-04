@@ -6,12 +6,20 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PersonaManager;
 using PersonaManager.Controllers;
+using PersonaManager.Models;
 
 namespace PersonaManager.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+        PersonaRepository repository;
+
+        [TestInitialize]        
+        public void Initialize()
+        {
+            repository = new PersonaRepository();
+        }
         [TestMethod]
         public void Index()
         {
@@ -23,32 +31,6 @@ namespace PersonaManager.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        }        
     }
 }

@@ -13,10 +13,12 @@ namespace PersonaManager.Models
     {
         List<Persona> personaList;
         SkillModel skillModel;
+        InheritanceModel inheritanceModel;
 
-        public PersonaModel(StreamReader reader, SkillModel model)
+        public PersonaModel(StreamReader reader, SkillModel skillModel, InheritanceModel inheritanceModel)
         {
-            skillModel = model;
+            this.skillModel = skillModel;
+            this.inheritanceModel = inheritanceModel;
             personaList = BuildPersonaList(reader);            
         }
 
@@ -44,7 +46,7 @@ namespace PersonaManager.Models
                     persona.Name = csv.GetField<string>("Persona");
                     persona.LearnedSkills = skillModel.GetLearnedSkillsFromSkillList(csv.GetField<string>("Skills"));
                     persona.InheritanceType = (csv.GetField<string>("Type") == "") ? PersonaInheritanceType.Any : (PersonaInheritanceType)Enum.Parse(typeof(PersonaInheritanceType), csv.GetField<string>("Type"));
-                    //persona.InheritableSkillTypes = inheritanceUtilities.GetSkillInheritance(persona.InheritanceType);
+                    persona.InheritableSkillTypes = inheritanceModel.GetSkillInheritanceByPersonaInheritanceType(persona.InheritanceType);
                     list.Add(persona);
                 }
             }
