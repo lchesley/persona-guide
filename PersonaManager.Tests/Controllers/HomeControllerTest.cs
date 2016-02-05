@@ -20,6 +20,7 @@ namespace PersonaManager.Tests.Controllers
         {
             repository = new PersonaRepository();
         }
+
         [TestMethod]
         public void Index()
         {
